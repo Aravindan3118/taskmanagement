@@ -1,0 +1,77 @@
+Conversation with Duda
+Started on October 22, 2018 at 02:22 AM America/Los_Angeles time (GMT-08:00)
+
+--- October 22, 2018 ---
+
+02:22 AM | Stefanie from Duda: Hi Aravindan,
+ 
+ You can now manage sites from a mobile device using Duda on the go. Edit content, track site stats and let your customers use this awesome service entirely under your brand.  
+ To help you get ready to go, check out this quick video. 
+ 
+[Inline Video] Have a question? Get answers from our team (https://www.duda.co/contact/schedule). 
+ Talk to Us (https://www.duda.co/contact/schedule)
+
+--- October 24, 2018 ---
+
+05:04 AM | Aravindan Natarajan: hello..! can i create dynamic post and dynamic page content and page template which will automatically assign to the respected post when i create any post
+
+05:31 AM | Emmanuel from Duda: Hey There, 
+ We spoke on the phone earlier. 
+ As I told you if I understood it well, we do not have such a feature, but could you provide an example of what you are talking about? 
+ Thank you
+
+05:38 AM | Aravindan Natarajan: like i need to create section that should take dynamic post for example i need a field for give title description and the video link that section should automatically update with that contents
+
+05:38 AM | Aravindan Natarajan: like we do in wordpress
+
+05:39 AM | Emmanuel from Duda: Can you please send me a site in order for me to see exactly what you are talking about? 
+ Thank you in advance.
+
+05:42 AM | Aravindan Natarajan: [Image "Screenshot+%286%29.png"]
+
+05:42 AM | Aravindan Natarajan: like this
+
+05:42 AM | Aravindan Natarajan: but without dragging the image widget for every image
+
+05:45 AM | Emmanuel from Duda: We have what we call connected data which means that in our content library, you can add data (images, content, etc.) and add them in many parts of the site without having to add each element separately all the time.
+
+05:45 AM | Emmanuel from Duda: Please read everything about connected data here: https://help.duda.co/hc/en-us/articles/360010229574-Connected-data 
+ Please let me know if I may be of any further assistance.
+
+05:45 AM | Aravindan Natarajan: ok sure
+
+05:45 AM | Aravindan Natarajan: i have one more question
+
+05:47 AM | Aravindan Natarajan: i talked with another person in duda support team about migrating business catalyst to duda the told that they will send the email but i dint get that can anyone help me with that i need a clarification in migrating
+
+06:06 AM | Emmanuel from Duda: You can just add your custom domain to your Duda site and create a CNAME with host www and destination s.multiscreensite.com
+
+06:07 AM | Emmanuel from Duda: The migration you are talking about is for how many sites?
+
+06:07 AM | Aravindan Natarajan: 400 sites
+
+06:08 AM | Emmanuel from Duda: Ah this is different, I thought you are talking about one site.
+
+06:08 AM | Emmanuel from Duda: Do you remember the person you talked to?
+
+06:09 AM | Aravindan Natarajan: no i don't remember and i am working for a client and i need to migrate all the 400 sites
+
+06:13 AM | Emmanuel from Duda: Ok no problem, a member of our sales team will contact you very soon. Please let me know if I may be of any further assistance.
+
+06:15 AM | Aravindan Natarajan: okay can i chat with you at anytime if i have doubt
+
+06:27 AM | Emmanuel from Duda: Of course yes!
+
+06:27 AM | Emmanuel from Duda: 😉
+
+07:21 AM | Aravindan Natarajan: hello sorry to disturb you can you please tell me whether i can create a common page template for some particular process and can i call that page with dynamic content of that relevant post ? is that possible
+
+07:35 AM | Aravindan Natarajan: can we create a one or more page template for different purpose and can we render that template in different place where it has to be render by give permalink(dynamically allocated either by id or the title).
+
+08:07 AM | Emmanuel from Duda: I will ask you to elaborate your first question as I'm not sure I fully understood it? 
+ Thank you
+
+08:10 AM | Emmanuel from Duda: Once the sales person will contact you by phone, please ask them all these questions and they will answer. This is the case because we are talking about the migration of 400 sites and therefore they will take over the discussion. Thank you for your understanding and you should be contacted very soon. 👍
+
+---
+Exported from Duda on October 24, 2018 at 09:31 AM America/Los_Angeles time (GMT-08:00)
