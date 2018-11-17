@@ -17,8 +17,15 @@
        <a href="<?php site_url(); ?>create_task"><button type="button" class="btn btn-info">Create Task</button></a>
      </div>
      <div class="box">
+       <?php if ($this->uri->segment(2) == 'deleted'): ?>
+         <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-info"></i> Task Deleted</h4>
+                The Task Has been Delted
+              </div>
+       <?php endif; ?>
             <div class="box-header">
-              <h3 class="box-title">Data Table With Full Features</h3>
+              <h3 class="box-title">Task List</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -32,6 +39,7 @@
                   <th>Start Date</th>
                   <th>End Date</th>
                   <th>File</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -48,6 +56,9 @@
                         <?php else: ?>
                           <p>No File for this task</p>
                       <?php endif; ?></td>
+                      <td><a class='btn btn-info' href="<?php site_url(); ?>create_task/<?php echo $row->task_id; ?>">Edit</a>
+                        <a class='btn btn-danger' href="<?php site_url(); ?>delete_task/<?php echo $row->task_id; ?>">Delete</a>
+                      </td>
                     </tr>
                   <?php endforeach; ?>
 
@@ -62,6 +73,7 @@
                   <th>Start Date</th>
                   <th>End Date</th>
                   <th>File</th>
+                  <th>Action</th>
                 </tr>
                 </tfoot>
               </table>

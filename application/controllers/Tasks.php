@@ -21,16 +21,17 @@ class Tasks extends Auth
     $this->load->view('vlte/all_tasks_view',$data);
     $this->load->view('ltetemplate/footer');
   }
-  public function create_task($em = NULL)
+  public function create_task($taskid = NULL)
   {
-    if ($em != NULL) {
-      $data['error_message'] = $em ;
-    }
-    else{
-      $data['error_message'] = NULL ;
-    }
+    // if ($em != NULL) {
+    //   $data['error_message'] = $em ;
+    // }
+    // else{
+    //   $data['error_message'] = NULL ;
+    // }
     $this->load->model('task_model');
     $data['fetch_type']=$this->task_model->fetch_type_data();
+    $data['fetch_edit_data']=$this->task_model->fetch_edit_data($taskid);
     $this->load->view('ltetemplate/header');
     $this->load->view('ltetemplate/sidebar');
     $this->load->view('vlte/create_task_view',$data);
@@ -50,6 +51,17 @@ class Tasks extends Auth
   public function created()
   {
     $this->create_task();
+  }
+  public function delete_task($taskid)
+  {
+    $this->load->model('task_model');
+    $del = $this->task_model->delete_task($taskid);
+    // $this->deleted();
+    redirect('tasks/deleted');
+  }
+  public function deleted()
+  {
+    $this->all_tasks();
   }
   public function task_upload(){
 
@@ -84,8 +96,9 @@ class Tasks extends Auth
                         // echo $this->upload->error();
                         $upload_file_name = NULL ;
                         $error_message = $error['error'];
-                       $this->create_task($em=$error_message);
-                        // $this->create_task();
+                       // $this->create_task($em=$error_message);
+                       echo $error_message;
+                        $this->create_task();
 
                    }
                 else
@@ -106,7 +119,9 @@ class Tasks extends Auth
               if ($mystartdate > $myenddate) {
                 // echo "date invalid";
                 $error_message = 'Start Date Should be less End Date';
-                $this->create_task($em=$error_message);
+                // $this->create_task($em=$error_message);
+                echo $error_message;
+                $this->create_task();
               }
               if (empty($error_message)) {
                 $data = array(

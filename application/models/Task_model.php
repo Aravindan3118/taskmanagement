@@ -25,6 +25,19 @@ class task_model extends CI_Model
        //echo $this->db->last_query();
        //exit;
   }
+  public function fetch_edit_data($taskid)
+  {
+    $this->db->select("*");
+    $this->db->from("task_main");
+    $this->db->where("task_id",$taskid);
+    $query = $this->db->get();
+    return $query;
+  }
+  public function delete_task($taskid)
+  {
+    $this->db->where('task_id', $taskid);
+    $this->db->delete('task_main');
+  }
 }
 
 

@@ -21,6 +21,7 @@
             <!-- form start -->
             <!-- enctype="multipart/form-data" -->
             <!-- <form action="<?php site_url(); ?>task_upload" method="post" class="form-horizontal"> -->
+
             <?php echo form_open_multipart('tasks/task_upload',array('class' => 'form-horizontal'));?>
             <?php if ($this->uri->segment(2) == 'created'): ?>
               <div class="alert alert-success alert-dismissible">
@@ -30,12 +31,14 @@
               </div>
             <?php endif; ?>
               <div class="box-body">
-                <div class="form-group">
+                <?php if ($this->uri->segment(3) != NULL): ?>
+                  <?php foreach ($fetch_edit_data->result() as $row): ?>
+                    <div class="form-group">
                   <label for="taskname" class="col-sm-2 control-label">Name</label>
 
                   <div class="col-sm-10">
                     <input type="text" name='taskname' class="form-control" id="taskname" placeholder="Task Name" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskname'];
-                    } ?>">
+                    }else{echo $row->task_name;}  ?>">
                     <span class='formerror'><?php echo form_error('taskname'); ?></span>
                   </div>
                 </div>
@@ -43,7 +46,7 @@
                   <label class="col-sm-2 control-label">Task description</label>
                   <div class="col-sm-10">
                   <textarea name="taskdescription" class="form-control" rows="8" placeholder="Task Description here..."><?php if (isset($_POST['submit_task'])) { echo $_POST['taskdescription'];
-                  } ?></textarea>
+                  }else{echo $row->task_description;} ?></textarea>
                   <span class='formerror'><?php echo form_error('taskdescription'); ?></span>
                 </div>
                 </div>
@@ -51,10 +54,9 @@
                   <label class="col-sm-2 control-label">Task Type</label>
                   <div class="col-sm-10">
                   <select name="task_type" class="form-control">
-                    <?php foreach ($fetch_type ->result() as $row): ?>
-                      <option value="<?php echo $row->task_type_id ?>"><?php echo $row->task_type_name; ?></option>
+                    <?php foreach ($fetch_type ->result() as $rows): ?>
+                      <option value="<?php echo $rows->task_type_id ?>"><?php echo $rows->task_type_name; ?></option>
                     <?php endforeach; ?>
-
                   </select>
                   <span class='formerror'><?php echo form_error('task_type'); ?></span>
                 </div>
@@ -64,7 +66,7 @@
 
             <div class="col-sm-10">
               <input type="number" name="taskestimation" class="form-control" id="estimatedhour" placeholder="Estimated Hours" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskestimation'];
-              } ?>">
+              }else{echo $row->estimated_hours;} ?>">
               <span class='formerror'><?php echo form_error('taskestimation'); ?></span>
             </div>
           </div>
@@ -77,7 +79,7 @@
                     <i class="fa fa-calendar"></i>
                   </div>
                   <input type="text" name="taskstartdate" class="form-control pull-right" id="startdatepicker" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskstartdate'];
-                  } ?>">
+                  }else{echo $row->start_date;} ?>">
                   </div>
                   <span class='formerror'><?php echo form_error('taskstartdate'); ?></span>
 
@@ -92,17 +94,25 @@
                         <i class="fa fa-calendar"></i>
                       </div>
                       <input type="text" name="taskenddate" class="form-control pull-right" id="enddatepicker" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskenddate'];
-                      } ?>">
+                      }else{echo $row->end_date;} ?>">
 
                     </div>
                     <span class='formerror'><?php echo form_error('taskenddate'); ?></span>
 
-                   <?php if ($error_message!= NULL): ?>
-                     <span class='formerror'><?php echo $error_message; ?><span>
-                   <?php endif; ?>
+                   <?php //if ($error_message!= NULL): ?>
+                     <!-- <span class='formerror'><?php //echo $error_message; ?><span> -->
+                   <?php //endif; ?>
                   </div>
                     <!-- /.input group -->
                   </div>
+                  <div class="form-group">
+                        <label class="col-sm-2 control-label">Uploaded File</label>
+                        <div class="col-sm-10">
+                  <!-- <input type="file" name="fileupload" value="fileupload" id="fileupload" size="20"> -->
+                    <a href="<?php echo base_url(); ?>uploads/<?php echo $row->upload_file; ?>"> <?php echo $row->upload_file; ?></a>
+                    <button type="button" id='changefilebtn' class="btn btn-info">Change File</button>
+                </div>
+              </div>
                   <div class="form-group">
                         <label class="col-sm-2 control-label">Upload File</label>
                         <div class="col-sm-10">
@@ -110,6 +120,91 @@
 
                 </div>
               </div>
+            <?php endforeach; ?>
+            <?php else: ?>
+              <div class="form-group">
+            <label for="taskname" class="col-sm-2 control-label">Name</label>
+
+            <div class="col-sm-10">
+              <input type="text" name='taskname' class="form-control" id="taskname" placeholder="Task Name" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskname'];
+              }  ?>">
+              <span class='formerror'><?php echo form_error('taskname'); ?></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Task description</label>
+            <div class="col-sm-10">
+            <textarea name="taskdescription" class="form-control" rows="8" placeholder="Task Description here..."><?php if (isset($_POST['submit_task'])) { echo $_POST['taskdescription'];
+            } ?></textarea>
+            <span class='formerror'><?php echo form_error('taskdescription'); ?></span>
+          </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Task Type</label>
+            <div class="col-sm-10">
+            <select name="task_type" class="form-control">
+              <?php foreach ($fetch_type ->result() as $rows): ?>
+                <option value="<?php echo $rows->task_type_id ?>"><?php echo $rows->task_type_name; ?></option>
+              <?php endforeach; ?>
+            </select>
+            <span class='formerror'><?php echo form_error('task_type'); ?></span>
+          </div>
+          </div>
+    <div class="form-group">
+      <label for="estimatedhour" class="col-sm-2 control-label">Estimated Hours</label>
+
+      <div class="col-sm-10">
+        <input type="number" name="taskestimation" class="form-control" id="estimatedhour" placeholder="Estimated Hours" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskestimation'];
+        }?>">
+        <span class='formerror'><?php echo form_error('taskestimation'); ?></span>
+      </div>
+    </div>
+    <div class="form-group">
+
+          <label class="col-sm-2 control-label">Task Start Date</label>
+          <div class="col-sm-10">
+          <div class="input-group date">
+            <div class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </div>
+            <input type="text" name="taskstartdate" class="form-control pull-right" id="startdatepicker" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskstartdate'];
+            }?>">
+            </div>
+            <span class='formerror'><?php echo form_error('taskstartdate'); ?></span>
+
+        </div>
+          <!-- /.input group -->
+        </div>
+        <div class="form-group">
+              <label class="col-sm-2 control-label">Task End Date</label>
+              <div class="col-sm-10">
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" name="taskenddate" class="form-control pull-right" id="enddatepicker" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskenddate'];
+                }?>">
+
+              </div>
+              <span class='formerror'><?php echo form_error('taskenddate'); ?></span>
+
+             <?php //if ($error_message!= NULL): ?>
+               <!-- <span class='formerror'><?php //echo $error_message; ?><span> -->
+             <?php //endif; ?>
+            </div>
+              <!-- /.input group -->
+            </div>
+            <div class="form-group">
+                  <label class="col-sm-2 control-label">Upload File</label>
+                  <div class="col-sm-10">
+            <input type="file" name="fileupload" value="fileupload" id="fileupload" size="20">
+
+          </div>
+        </div>
+        <?php endif; ?>
+
+
+
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
