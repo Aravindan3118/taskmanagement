@@ -79,7 +79,7 @@
                     <i class="fa fa-calendar"></i>
                   </div>
                   <input type="text" name="taskstartdate" class="form-control pull-right" id="startdatepicker" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskstartdate'];
-                  }else{echo $row->start_date;} ?>">
+                  }else{echo $row->dfstart;} ?>">
                   </div>
                   <span class='formerror'><?php echo form_error('taskstartdate'); ?></span>
 
@@ -94,7 +94,7 @@
                         <i class="fa fa-calendar"></i>
                       </div>
                       <input type="text" name="taskenddate" class="form-control pull-right" id="enddatepicker" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskenddate'];
-                      }else{echo $row->end_date;} ?>">
+                      }else{echo $row->dfend;} ?>">
 
                     </div>
                     <span class='formerror'><?php echo form_error('taskenddate'); ?></span>

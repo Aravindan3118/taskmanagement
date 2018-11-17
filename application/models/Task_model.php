@@ -27,10 +27,11 @@ class task_model extends CI_Model
   }
   public function fetch_edit_data($taskid)
   {
-    $this->db->select("*");
+    $this->db->select("*, DATE_FORMAT(start_date, '%m/%d/%Y') as 'dfstart', DATE_FORMAT(end_date, '%m/%d/%Y') as 'dfend'");
     $this->db->from("task_main");
     $this->db->where("task_id",$taskid);
     $query = $this->db->get();
+    // echo $this->db->last_query();
     return $query;
   }
   public function delete_task($taskid)
