@@ -120,14 +120,19 @@
                   <!-- <input type="file" name="fileupload" value="fileupload" id="fileupload" size="20"> -->
                   <input type="text" name="hideenfile" hidden value="<?php echo $row->upload_file; ?>">
                   <input type="text" name="hideentaskid" hidden value="<?php echo $row->task_id; ?>">
-                    <a href="<?php echo base_url(); ?>uploads/<?php echo $row->upload_file; ?>"> <?php echo $row->upload_file; ?></a>
-                    <button type="button" id='changefilebtn' class="btn btn-info">Change File</button>
+                  <?php foreach ($fetch_file_data->result() as $file_row): ?>
+                    <a href="<?php echo base_url(); ?>uploads/<?php echo $file_row->file_name; ?>"><?php echo $file_row->file_name; ?>&nbsp;&nbsp;&nbsp;</a>
+                    <a class="btn btn-danger delete_file" id="<?php echo $file_row->file_id; ?>">Delete</a><br>
+                    <?php $this->session->set_flashdata('task_id',$row->task_id); ?>
+                  <?php endforeach; ?>
+
+                    <button type="button" id='changefilebtn' class="btn btn-info">Add File</button>
                 </div>
               </div>
                   <div class="form-group" id='changefile'>
                         <label class="col-sm-2 control-label">Upload File</label>
                         <div class="col-sm-10">
-                  <input type="file" name="fileupload" value="fileupload" id="fileupload" size="20">
+                  <input type="file" name="fileupload[]" multiple='' value="fileupload" id="fileupload" size="20">
                   <span style="color:green;font-size:18px;">Allowed TYPES: gif, jpg, png, bmp, jpeg, pdf, doc, docx, ppt, pptx, xls</span>
                   <span class="formerror"><?php if($this->session->flashdata('error')){echo $this->session->flashdata('error');} ?></span>
 
@@ -136,7 +141,7 @@
             <?php endforeach; ?>
             <div class="box-footer">
 
-              <input type="submit" name="update_task"  class="btn btn-info pull-right">Submit</input>
+              <input type="submit" name="update_task"  class="btn btn-info pull-right" value="Update Task"></input>
             </div>
             <?php else: ?>
               <div class="form-group">
@@ -185,7 +190,8 @@
             <div class="input-group-addon">
               <i class="fa fa-calendar"></i>
             </div>
-            <input type="text" name="taskstartdate" class="form-control pull-right" id="startdatepicker" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskstartdate'];
+            <input type="text" name="taskstartdate" class="form-control pull-right" id="startdatepicker" value="<?php if (isset($_POST['
+            _task'])) { echo $_POST['taskstartdate'];
             }?>">
             </div>
             <span class='formerror'><?php echo form_error('taskstartdate'); ?></span>
@@ -221,7 +227,7 @@
         </div>
         <div class="box-footer">
 
-          <input type="submit" name="submit_task"  class="btn btn-info pull-right">Submit</input>
+          <input type="submit" name="submit_task"  class="btn btn-info pull-right" value="Create Task"></input>
         </div>
         <?php endif; ?>
 

@@ -13,10 +13,12 @@ class task_model extends CI_Model
   }
   function fetch_task()
   {
-    $this->db->select("*,tast_type.task_type_name as 'tpn'");
+    $this->db->select("*,tast_type.task_type_name as 'tpn' ");
     $this->db->from("task_main");
     $this->db->join('tast_type', 'task_main.task_type = tast_type.task_type_id');
-
+    // $this->db->join('task_files', 'task_main.task_id = task_files.task_id', 'right');
+    $array = array('is_deleted' => 0);
+    $this->db->where($array);
     $query = $this->db->get();
     // echo $this->db->last_query();
     return $query;
@@ -47,10 +49,25 @@ class task_model extends CI_Model
     // echo $this->db->last_query();
     return $query;
   }
-  public function delete_task($taskid)
+  public function delete_task($taskid,$data)
   {
     $this->db->where('task_id', $taskid);
-    $this->db->delete('task_main');
+    // $this->db->delete('task_main');
+      $this->db->update("task_main", $data);
+  }
+  public function delete_file($fileid)
+  {
+    $this->db->select("*");
+    $this->db->from("task_files");
+    $this->db->where("file_id",$fileid);
+    $query = $this->db->get();
+    $this->db->where('file_id', $fileid);
+    $this->db->delete('task_files');
+
+    return $query->row_array();
+    // echo $query->result();
+
+
   }
   public function update_task_data($data , $task_id){
     $this->db->where("task_id", $task_id);
@@ -67,6 +84,14 @@ class task_model extends CI_Model
     else{
       return false;
     }
+  }
+  public function fetch_file_data($taskid)
+  {
+    $this->db->select("*");
+    $this->db->from("task_files");
+    $this->db->where('task_id',$taskid);
+    $query = $this->db->get();
+    return $query;
   }
 
 }

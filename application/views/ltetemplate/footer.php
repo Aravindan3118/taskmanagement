@@ -266,7 +266,32 @@ $("#changefile").hide();
         $("#changefile").show();
         // console.log('test');
   });
+  $('.delete_data').click(function(){
+    var id = $(this).attr("id");
+    // console.log(id);
+    if(confirm("Are you sure you want to delete this Task?"))
+    {
+         window.location="<?php echo site_url(); ?>tasks/delete_task/"+id;
+    }
+    else
+    {
+         return false;
+    }
 
+  });
+  $('.delete_file').click(function(){
+    var id = $(this).attr("id");
+    // console.log(id);
+    if(confirm("Are you sure you want to delete this File?"))
+    {
+         window.location="<?php echo site_url(); ?>tasks/delete_file/"+id;
+    }
+    else
+    {
+         return false;
+    }
+
+  });
 });
 </script>
 
