@@ -32,20 +32,28 @@
             <?php endif; ?>
               <div class="box-body">
                 <?php if ($this->uri->segment(3) != NULL): ?>
+                  <?php if ($this->uri->segment(2) == 'updated'): ?>
+                    <div class="alert alert-info alert-dismissible">
+                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                           <h4><i class="icon fa fa-info"></i> Task Updated</h4>
+                           The Task Has been Updated
+                         </div>
+                  <?php endif; ?>
                   <?php foreach ($fetch_edit_data->result() as $row): ?>
                     <div class="form-group">
                   <label for="taskname" class="col-sm-2 control-label">Name</label>
 
                   <div class="col-sm-10">
-                    <input type="text" name='taskname' class="form-control" id="taskname" placeholder="Task Name" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskname'];
+                    <input type="text" name='taskname' class="form-control" id="taskname" placeholder="Task Name" value="<?php if (isset($_POST['update_task'])) { echo $_POST['taskname'];
                     }else{echo $row->task_name;}  ?>">
                     <span class='formerror'><?php echo form_error('taskname'); ?></span>
+                    <span class="formerror"><?php if($this->session->flashdata('task_name_error')){echo $this->session->flashdata('task_name_error');} ?></span>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Task description</label>
                   <div class="col-sm-10">
-                  <textarea name="taskdescription" class="form-control" rows="8" placeholder="Task Description here..."><?php if (isset($_POST['submit_task'])) { echo $_POST['taskdescription'];
+                  <textarea name="taskdescription" class="form-control" rows="8" placeholder="Task Description here..."><?php if (isset($_POST['update_task'])) { echo $_POST['taskdescription'];
                   }else{echo $row->task_description;} ?></textarea>
                   <span class='formerror'><?php echo form_error('taskdescription'); ?></span>
                 </div>
@@ -65,7 +73,7 @@
             <label for="estimatedhour" class="col-sm-2 control-label">Estimated Hours</label>
 
             <div class="col-sm-10">
-              <input type="number" name="taskestimation" class="form-control" id="estimatedhour" placeholder="Estimated Hours" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskestimation'];
+              <input type="number" name="taskestimation" class="form-control" id="estimatedhour" placeholder="Estimated Hours" value="<?php if (isset($_POST['update_task'])) { echo $_POST['taskestimation'];
               }else{echo $row->estimated_hours;} ?>">
               <span class='formerror'><?php echo form_error('taskestimation'); ?></span>
             </div>
@@ -78,7 +86,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" name="taskstartdate" class="form-control pull-right" id="startdatepicker" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskstartdate'];
+                  <input type="text" name="taskstartdate" class="form-control pull-right" id="startdatepicker" value="<?php if (isset($_POST['update_task'])) { echo $_POST['taskstartdate'];
                   }else{echo $row->dfstart;} ?>">
                   </div>
                   <span class='formerror'><?php echo form_error('taskstartdate'); ?></span>
@@ -93,11 +101,12 @@
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" name="taskenddate" class="form-control pull-right" id="enddatepicker" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskenddate'];
+                      <input type="text" name="taskenddate" class="form-control pull-right" id="enddatepicker" value="<?php if (isset($_POST['update_task'])) { echo $_POST['taskenddate'];
                       }else{echo $row->dfend;} ?>">
 
                     </div>
                     <span class='formerror'><?php echo form_error('taskenddate'); ?></span>
+                    <span class="formerror"><?php if($this->session->flashdata('date_error')){echo $this->session->flashdata('date_error');} ?></span>
 
                    <?php //if ($error_message!= NULL): ?>
                      <!-- <span class='formerror'><?php //echo $error_message; ?><span> -->
@@ -109,18 +118,26 @@
                         <label class="col-sm-2 control-label">Uploaded File</label>
                         <div class="col-sm-10">
                   <!-- <input type="file" name="fileupload" value="fileupload" id="fileupload" size="20"> -->
+                  <input type="text" name="hideenfile" hidden value="<?php echo $row->upload_file; ?>">
+                  <input type="text" name="hideentaskid" hidden value="<?php echo $row->task_id; ?>">
                     <a href="<?php echo base_url(); ?>uploads/<?php echo $row->upload_file; ?>"> <?php echo $row->upload_file; ?></a>
                     <button type="button" id='changefilebtn' class="btn btn-info">Change File</button>
                 </div>
               </div>
-                  <div class="form-group">
+                  <div class="form-group" id='changefile'>
                         <label class="col-sm-2 control-label">Upload File</label>
                         <div class="col-sm-10">
                   <input type="file" name="fileupload" value="fileupload" id="fileupload" size="20">
+                  <span style="color:green;font-size:18px;">Allowed TYPES: gif, jpg, png, bmp, jpeg, pdf, doc, docx, ppt, pptx, xls</span>
+                  <span class="formerror"><?php if($this->session->flashdata('error')){echo $this->session->flashdata('error');} ?></span>
 
                 </div>
               </div>
             <?php endforeach; ?>
+            <div class="box-footer">
+
+              <input type="submit" name="update_task"  class="btn btn-info pull-right">Submit</input>
+            </div>
             <?php else: ?>
               <div class="form-group">
             <label for="taskname" class="col-sm-2 control-label">Name</label>
@@ -129,6 +146,7 @@
               <input type="text" name='taskname' class="form-control" id="taskname" placeholder="Task Name" value="<?php if (isset($_POST['submit_task'])) { echo $_POST['taskname'];
               }  ?>">
               <span class='formerror'><?php echo form_error('taskname'); ?></span>
+              <span class="formerror"><?php if($this->session->flashdata('task_name_error')){echo $this->session->flashdata('task_name_error');} ?></span>
             </div>
           </div>
           <div class="form-group">
@@ -187,30 +205,29 @@
 
               </div>
               <span class='formerror'><?php echo form_error('taskenddate'); ?></span>
-
-             <?php //if ($error_message!= NULL): ?>
-               <!-- <span class='formerror'><?php //echo $error_message; ?><span> -->
-             <?php //endif; ?>
+              <span class="formerror"><?php if($this->session->flashdata('date_error')){echo $this->session->flashdata('date_error');} ?></span>
             </div>
               <!-- /.input group -->
             </div>
             <div class="form-group">
                   <label class="col-sm-2 control-label">Upload File</label>
                   <div class="col-sm-10">
-            <input type="file" name="fileupload" value="fileupload" id="fileupload" size="20">
+            <input type="file" multiple="" name="fileupload[]" value="fileupload" id="fileupload" size="20">
+
+            <span style="color:green;font-size:18px;">Allowed TYPES: gif, jpg, png, bmp, jpeg, pdf, doc, docx, ppt, pptx, xls</span>
+            <span class="formerror"><?php if($this->session->flashdata('error')){echo $this->session->flashdata('error');} ?></span>
 
           </div>
         </div>
+        <div class="box-footer">
+
+          <input type="submit" name="submit_task"  class="btn btn-info pull-right">Submit</input>
+        </div>
         <?php endif; ?>
-
-
 
               </div>
               <!-- /.box-body -->
-              <div class="box-footer">
-                <!-- <button type="submit" class="btn btn-default">Cancel</button> -->
-                <input type="submit" name="submit_task"  class="btn btn-info pull-right">Submit</input>
-              </div>
+
               <!-- /.box-footer -->
             </form>
           </div>

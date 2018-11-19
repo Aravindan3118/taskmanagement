@@ -47,7 +47,7 @@
                     <tr>
                       <td><?php echo $row->task_name ?></td>
                       <td><?php echo $row->task_description ?></td>
-                      <td><?php echo $row->task_type?></td>
+                      <td><?php echo $row->tpn?></td>
                       <td><?php echo $row->estimated_hours ?></td>
                       <td><?php echo $row->start_date ?></td>
                       <td><?php echo $row->end_date ?></td>
@@ -78,7 +78,6 @@
                 </tfoot>
               </table>
             </div>
-            <!-- /.box-body -->
           </div>
 
    </section>

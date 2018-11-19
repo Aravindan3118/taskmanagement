@@ -16,7 +16,7 @@ class Register extends CI_Controller
 
   public function register_req()
   {
-    // echo "ok";
+    echo "ok";
     $this->load->library('form_validation');
     $this->form_validation->set_rules("username","Username",array('required', 'min_length[5]'));
     $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');

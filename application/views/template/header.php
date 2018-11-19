@@ -32,6 +32,7 @@
      <li><a href="<?php echo site_url(); ?>">Home</a></li>
      <li><a href="<?php echo site_url(); ?>test">Test</a></li>
      <li><a href="<?php echo base_url() ?>posts">Posts</a></li>
+     <li><a href="<?php echo base_url() ?>tasks">Tasks</a></li>
      <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin'): ?>
        <li><a href="<?php echo base_url() ?>users">Users</a></li>
      <?php endif; ?>

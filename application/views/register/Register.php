@@ -23,34 +23,35 @@ background-image: url("<?php echo base_url(); ?>image/signup-bg.jpg");
                 echo '<p class="text-success">Data Inserted</p>';
            } ?>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="username" id="name" value="<?php if(isset($_POST['insertdetails'])){echo $_POST['username'];} ?>" placeholder="Your Name"/>
+                          User name (4 characters minimum, only alphanumeric characters):
+                            <input type="text" class="form-input" data-validation="required length" data-validation-length="min5" name="username" id="name" value="<?php if(isset($_POST['insertdetails'])){echo $_POST['username'];} ?>" placeholder="Your Name"/>
                             <span class="formerror"><?php echo form_error('username'); ?></span>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-input" name="email" id="email" value="<?php if(isset($_POST['insertdetails'])){echo $_POST['email'];} ?>" placeholder="Your Email"/>
+                            <input type="email" data-validation="email" class="form-input" name="email" id="email" value="<?php if(isset($_POST['insertdetails'])){echo $_POST['email'];} ?>" placeholder="Your Email"/>
                             <span class="formerror"><?php echo form_error('email'); ?></span>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-input" name="password" id="password" placeholder="Password"/>
+                            <input type="password" data-validation="length" data-validation-length='min8' class="form-input" name="password" id="password" placeholder="Password"/>
                             <span class="formerror"><?php echo form_error('password'); ?></span>
                             <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password"/>
+                            <input type="password" class="form-input" name="re_password"  data-validation="confirmation" data-validation-confirm="password" id="re_password" placeholder="Repeat your password"/>
                             <span class="formerror"><?php echo form_error('re_password'); ?></span>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="usermobile" value="<?php if(isset($_POST['insertdetails'])){echo $_POST['usermobile'];} ?>" placeholder="Enter your Mobile Number"/>
+                            <input type="text" data-validation="length" data-validation-length='min10' class="form-input" name="usermobile" value="<?php if(isset($_POST['insertdetails'])){echo $_POST['usermobile'];} ?>" placeholder="Enter your Mobile Number"/>
                             <span class="formerror"><?php echo form_error('usermobile'); ?></span>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                            <select class="form-input" name="country">
                              <option value="sample">Sample</option>
-                             <?php foreach ($country->result() as $row ): ?>
-                               <option value="<?php echo $row->country_id; ?>"><?php echo $row->country_name; ?></option>
-                             <?php endforeach; ?>
+                             <?php //foreach ($country->result() as $row ): ?>
+                               <option value="<?php //echo $row->country_id; ?>"><?php //echo $row->country_name; ?></option>
+                             <?php //endforeach; ?>
                            </select>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <input type="submit" name="insertdetails" id="submit" class="form-submit" value="Sign up"/>
                         </div>
