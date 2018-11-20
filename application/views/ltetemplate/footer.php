@@ -241,7 +241,12 @@ $.widget.bridge('uibutton', $.ui.button);
 <script src="<?php echo base_url(); ?>lte/dist/js/demo.js"></script>
 <script>
  $(function () {
-   $('#example1').DataTable()
+   $('#example1').DataTable({
+     'aoColumnDefs': [{
+        'bSortable': false,
+        'aTargets': [-1] /* 1st one, start by the right */
+    }]
+   })
    $('#example2').DataTable({
      'paging'      : true,
      'lengthChange': false,

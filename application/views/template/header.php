@@ -12,7 +12,7 @@
 
    <head>
       <meta charset = "utf-8">
-      <title>CodeIgniter View Example</title>
+      <title>Task Management</title>
       <!-- <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css"> -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -26,13 +26,13 @@
      <nav class="navbar navbar-inverse">
  <div class="container-fluid">
    <div class="navbar-header">
-     <a class="navbar-brand" href="#">WebSiteName</a>
+     <a class="navbar-brand" href="#">Task Management</a>
    </div>
    <ul class="nav navbar-nav">
-     <li><a href="<?php echo site_url(); ?>">Home</a></li>
-     <li><a href="<?php echo site_url(); ?>test">Test</a></li>
-     <li><a href="<?php echo base_url() ?>posts">Posts</a></li>
-     <li><a href="<?php echo base_url() ?>tasks">Tasks</a></li>
+     <!-- <li><a href="<?php //echo site_url(); ?>">Home</a></li> -->
+     <!-- <li><a href="<?php //echo site_url(); ?>test">Test</a></li> -->
+     <!-- <li><a href="<?php //echo base_url() ?>posts">Posts</a></li> -->
+     <li><a href="<?php echo base_url() ?>tasks/all_tasks">Tasks</a></li>
      <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin'): ?>
        <li><a href="<?php echo base_url() ?>users">Users</a></li>
      <?php endif; ?>

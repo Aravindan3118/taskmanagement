@@ -1,22 +1,23 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Page Header
-        <small>Optional description</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>
-    </section>
+
 
     <!-- Main content -->
     <section class="content container-fluid">
       <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Create Task</h3>
+              <h3 class="box-title">Task</h3>
             </div>
+            <div class="formerror" style="text-align:center;"><?php
+            if ($this->session->flashdata('msg')) {
+              $msg = $this->session->flashdata('msg');
+              // echo $msg['first'];
+              foreach ($msg as $key => $value) {
+               echo $value;
+              }
+            }
+            ?></div>
+
             <!-- /.box-header -->
             <!-- form start -->
             <!-- enctype="multipart/form-data" -->
@@ -32,13 +33,17 @@
             <?php endif; ?>
               <div class="box-body">
                 <?php if ($this->uri->segment(3) != NULL): ?>
-                  <?php if ($this->uri->segment(2) == 'updated'): ?>
-                    <div class="alert alert-info alert-dismissible">
-                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                           <h4><i class="icon fa fa-info"></i> Task Updated</h4>
-                           The Task Has been Updated
-                         </div>
-                  <?php endif; ?>
+
+                    <?php if ($this->session->flashdata('updated_message')): ?>
+
+                      <div class="alert alert-info alert-dismissible">
+                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                             <h4><i class="icon fa fa-info"></i> Task Updated</h4>
+                             The Task Has been Updated
+                           </div>
+                    <?php endif; ?>
+
+
                   <?php foreach ($fetch_edit_data->result() as $row): ?>
                     <div class="form-group">
                   <label for="taskname" class="col-sm-2 control-label">Name</label>
@@ -118,10 +123,14 @@
                         <label class="col-sm-2 control-label">Uploaded File</label>
                         <div class="col-sm-10">
                   <!-- <input type="file" name="fileupload" value="fileupload" id="fileupload" size="20"> -->
-                  <input type="text" name="hideenfile" hidden value="<?php echo $row->upload_file; ?>">
+                  <!-- <input type="text" name="hideenfile" hidden value="<?php //echo $row->upload_file; ?>"> -->
                   <input type="text" name="hideentaskid" hidden value="<?php echo $row->task_id; ?>">
+                  <?php if ($fetch_file_data->num_rows() == 0): ?>
+                    <?php echo 'There Are no files has been uploaded to this Task<br>' ?>
+                  <?php endif; ?>
                   <?php foreach ($fetch_file_data->result() as $file_row): ?>
-                    <a href="<?php echo base_url(); ?>uploads/<?php echo $file_row->file_name; ?>"><?php echo $file_row->file_name; ?>&nbsp;&nbsp;&nbsp;</a>
+
+                    <a href="<?php echo site_url(); ?>tasks/downloadfile/<?php echo $filename = $file_row->file_name; ?>"> <i class="fa fa-save"></i><?php echo $file_row->file_name; ?></a>
                     <a class="btn btn-danger delete_file" id="<?php echo $file_row->file_id; ?>">Delete</a><br>
                     <?php $this->session->set_flashdata('task_id',$row->task_id); ?>
                   <?php endforeach; ?>
@@ -133,7 +142,7 @@
                         <label class="col-sm-2 control-label">Upload File</label>
                         <div class="col-sm-10">
                   <input type="file" name="fileupload[]" multiple='' value="fileupload" id="fileupload" size="20">
-                  <span style="color:green;font-size:18px;">Allowed TYPES: gif, jpg, png, bmp, jpeg, pdf, doc, docx, ppt, pptx, xls</span>
+                  <span style="color:green;font-size:18px;">Allowed TYPES: gif, jpg, png, bmp, jpeg, pdf, doc, docx, ppt, pptx, xls , txt</span>
                   <span class="formerror"><?php if($this->session->flashdata('error')){echo $this->session->flashdata('error');} ?></span>
 
                 </div>
@@ -220,7 +229,7 @@
                   <div class="col-sm-10">
             <input type="file" multiple="" name="fileupload[]" value="fileupload" id="fileupload" size="20">
 
-            <span style="color:green;font-size:18px;">Allowed TYPES: gif, jpg, png, bmp, jpeg, pdf, doc, docx, ppt, pptx, xls</span>
+            <span style="color:green;font-size:18px;">Allowed TYPES: gif, jpg, png, bmp, jpeg, pdf, doc, docx, ppt, pptx, xls, txt</span>
             <span class="formerror"><?php if($this->session->flashdata('error')){echo $this->session->flashdata('error');} ?></span>
 
           </div>

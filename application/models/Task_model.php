@@ -17,7 +17,12 @@ class task_model extends CI_Model
     $this->db->from("task_main");
     $this->db->join('tast_type', 'task_main.task_type = tast_type.task_type_id');
     // $this->db->join('task_files', 'task_main.task_id = task_files.task_id', 'right');
-    $array = array('is_deleted' => 0);
+
+    if ($_SESSION['user_type'] != 'admin') {
+      $array = array('is_deleted' => 0,'created_by' => $_SESSION['user_id']);
+    }else{
+      $array = array('is_deleted' => 0);
+    }
     $this->db->where($array);
     $query = $this->db->get();
     // echo $this->db->last_query();

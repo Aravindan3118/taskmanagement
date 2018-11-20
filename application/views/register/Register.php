@@ -23,7 +23,7 @@ background-image: url("<?php echo base_url(); ?>image/signup-bg.jpg");
                 echo '<p class="text-success">Data Inserted</p>';
            } ?>
                         <div class="form-group">
-                          User name (4 characters minimum, only alphanumeric characters):
+                          
                             <input type="text" class="form-input" data-validation="required length" data-validation-length="min5" name="username" id="name" value="<?php if(isset($_POST['insertdetails'])){echo $_POST['username'];} ?>" placeholder="Your Name"/>
                             <span class="formerror"><?php echo form_error('username'); ?></span>
                         </div>

@@ -1,15 +1,6 @@
 <div class="content-wrapper">
    <!-- Content Header (Page header) -->
-   <section class="content-header">
-     <h1>
-       Page Header
-       <small>Optional description</small>
-     </h1>
-     <ol class="breadcrumb">
-       <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-       <li class="active">Here</li>
-     </ol>
-   </section>
+
 
    <!-- Main content -->
    <section class="content container-fluid">
@@ -38,7 +29,7 @@
                   <th>Estimated Hours</th>
                   <th>Start Date</th>
                   <th>End Date</th>
-                  <th>View</th>
+                  <!-- <th>View</th> -->
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -51,13 +42,13 @@
                       <td><?php echo $row->estimated_hours ?></td>
                       <td><?php echo $row->start_date ?></td>
                       <td><?php echo $row->end_date ?></td>
-                      <td><?php //if ($row->upload_file != NULL): ?>
-                        <a class="btn btn-success" href="#">View Task</a>
+                      <!-- <td><?php //if ($row->upload_file != NULL): ?> -->
+                        <!-- <a class='btn btn-success' href="<?php //site_url(); ?>view_task/<?php //echo $row->task_id; ?>">View</a> -->
                         <!-- <a class="btn btn-success" href="<?php //site_url();?>downloadfile/<?php //echo $filename = $row->upload_file ?>"><i class="fa fa-save"></i> Download File</a> -->
                         <?php //else: ?>
                           <!-- <p>No File for this task</p> -->
-                      <?php //endif; ?></td>
-                      <td><a class='btn btn-info' href="<?php site_url(); ?>create_task/<?php echo $row->task_id; ?>">Edit</a>
+                      <!-- <?php //endif; ?></td> -->
+                      <td><a class='btn btn-info' href="<?php site_url(); ?>create_task/<?php echo $row->task_id; ?>">View</a>
                         <!-- <a class='btn btn-danger' href="<?php //site_url(); ?>delete_task/<?php //echo $row->task_id; ?>">Delete</a> -->
                      <a class="btn btn-danger delete_data" id="<?php echo $row->task_id; ?>">Delete</a>
                       </td>
@@ -74,7 +65,7 @@
                   <th>Estimated Hours</th>
                   <th>Start Date</th>
                   <th>End Date</th>
-                  <th>View</th>
+                  <!-- <th>View</th> -->
                   <th>Action</th>
                 </tr>
                 </tfoot>

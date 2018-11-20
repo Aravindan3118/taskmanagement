@@ -22,7 +22,7 @@ class Login extends CI_Controller
            $this->index($error_msg);
     }else{
         // echo "valid<br>";
-        redirect('');
+        redirect('tasks/all_tasks');
     }
   }
 
