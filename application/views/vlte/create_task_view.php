@@ -141,16 +141,17 @@
                   <div class="form-group" id='changefile'>
                         <label class="col-sm-2 control-label">Upload File</label>
                         <div class="col-sm-10">
-                  <input type="file" name="fileupload[]" multiple='' value="fileupload" id="fileupload" size="20">
+                  <input type="file" name="fileupload[]" multiple='' value="fileupload" id="fileupload">
                   <span style="color:green;font-size:18px;">Allowed TYPES: gif, jpg, png, bmp, jpeg, pdf, doc, docx, ppt, pptx, xls , txt</span>
                   <span class="formerror"><?php if($this->session->flashdata('error')){echo $this->session->flashdata('error');} ?></span>
+                  <span class="formerror" id='exceed_error'></span>
 
                 </div>
               </div>
             <?php endforeach; ?>
             <div class="box-footer">
-
-              <input type="submit" name="update_task"  class="btn btn-info pull-right" value="Update Task"></input>
+              <a class="btn btn-default pull-left" href="<?php echo base_url(); ?>/tasks/all_tasks">Back</a>
+              <input type="submit" name="update_task" id="update_task"  class="btn btn-info pull-right" value="Update Task"></input>
             </div>
             <?php else: ?>
               <div class="form-group">
@@ -227,16 +228,18 @@
             <div class="form-group">
                   <label class="col-sm-2 control-label">Upload File</label>
                   <div class="col-sm-10">
-            <input type="file" multiple="" name="fileupload[]" value="fileupload" id="fileupload" size="20">
+            <input type="file" multiple="" name="fileupload[]" value="fileupload" id="fileupload">
 
             <span style="color:green;font-size:18px;">Allowed TYPES: gif, jpg, png, bmp, jpeg, pdf, doc, docx, ppt, pptx, xls, txt</span>
             <span class="formerror"><?php if($this->session->flashdata('error')){echo $this->session->flashdata('error');} ?></span>
+            <span class="formerror"><?php if($this->session->flashdata('file_max_error')){echo $this->session->flashdata('file_max_error');} ?></span>
+            <span class="formerror" id='exceed_error'></span>
 
           </div>
         </div>
         <div class="box-footer">
-
-          <input type="submit" name="submit_task"  class="btn btn-info pull-right" value="Create Task"></input>
+          <a class="btn btn-default pull-left" href="<?php echo base_url(); ?>/tasks/all_tasks">Back</a>
+          <input type="submit" name="submit_task" id='submit_task'  class="btn btn-info pull-right" value="Create Task"></input>
         </div>
         <?php endif; ?>
 

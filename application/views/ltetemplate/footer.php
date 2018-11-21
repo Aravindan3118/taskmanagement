@@ -297,9 +297,30 @@ $("#changefile").hide();
     }
 
   });
+  $("input#fileupload").change(function(){
+  var files = $(this)[0].files;
+  if(files.length > 25){
+     // console.log('exceeded');
+     $('#exceed_error').html('<p>Maximum file You can upload is 25</p>');
+     $("#submit_task").hide();
+     $("#update_task").hide();
+
+  }
+  else{
+    $('#exceed_error').html('');
+    $("#submit_task").show();
+    $("#update_task").show();
+  }
+
+  });
+
 });
 </script>
 
+
+
+
+ ?>
 <script src="<?php echo base_url(); ?>lte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>lte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 </body>
